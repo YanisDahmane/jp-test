@@ -89,3 +89,15 @@ FOREIGN KEY ("market_id")
   [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Pomme"], ["code", "P"], ["price", 2.0], ["created_at", "2024-09-13 10:57:14.569361"], ["updated_at", "2024-09-13 10:57:14.569361"], ["market_id", 1]]
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ? /* loading for pp */ LIMIT ?[0m  [["market_id", 1], ["LIMIT", 11]]
+Started GET "/favicon.ico" for ::1 at 2024-09-13 13:06:01 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for ::1 at 2024-09-13 13:06:03 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/yanis/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/yanis/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.3ms | GC: 0.0ms)
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
