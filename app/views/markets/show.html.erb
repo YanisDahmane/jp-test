@@ -1,1 +1,10 @@
-<h1><%= @market.name %></h1>
+<h2 class="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white"><%= @market.name %></h2>
+<div class="grid grid-cols-3 h-screen gap-4">
+  <div class="col-span-2">
+    <%= render 'grid_items', items: @items %>
+  </div>
+
+  <div>
+    <%= render 'order_summary' %>
+  </div>
+</div>

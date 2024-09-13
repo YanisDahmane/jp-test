@@ -4,7 +4,9 @@ class MarketsController < ApplicationController
     @markets = Market.all
   end
 
-  def show; end
+  def show
+    @items = @market.items
+  end
 
   private
 
