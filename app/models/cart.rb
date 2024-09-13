@@ -1,27 +1,20 @@
 class Cart < ApplicationRecord
-  attr_accessor :items
-  def initialize(*args)
-    super
-    @items = {}
-  end
-
+  has_many :cart_items, dependent: :destroy
   def add_item(item)
-    id = item.id.to_s
-    if @items[id]
-      @items[id][:quantity] += 1
+    cart_item = cart_items.find_by(item: item)
+    if cart_item
+      cart_item.quantity += 1
+      cart_item.save
     else
-      @items[id] = { item: item, quantity: 1 }
+      cart_items.create(cart: self, item: item, quantity: 1)
     end
   end
 
   def remove_item(item)
-    id = item.id.to_s
-    if @items[id]
-      if @items[id][:quantity] > 1
-        @items[id][:quantity] -= 1
-      else
-        @items.delete(id)
-      end
+    cart_item = cart_items.find_by(item: item)
+    if cart_item
+      cart_item.quantity -= 1
+      cart_item.destroy if cart_item.quantity.zero?
     end
   end
 end

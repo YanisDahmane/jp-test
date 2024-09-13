@@ -5,7 +5,7 @@
   </div>
 
   <div>
-    <%= render 'order_summary' %>
+    <%= render 'carts/order_summary', cart: @cart, cart_items: @cart_items %>
   </div>
   <%= console %>
 </div>

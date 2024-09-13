@@ -7,6 +7,7 @@ class MarketsController < ApplicationController
   def show
     @items = @market.items
     @cart = current_cart
+    @cart_items = @cart.cart_items.preload(:item)
   end
 
   private

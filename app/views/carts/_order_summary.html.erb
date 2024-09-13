@@ -6,39 +6,19 @@
       <div class="relative overflow-x-auto border-b border-gray-200 dark:border-gray-800">
         <table class="w-full text-left font-medium text-gray-900 dark:text-white md:table-fixed">
           <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
-            <tr>
-              <td class="whitespace-nowrap py-4 md:w-[250px]">
-                <div class="flex items-center gap-4">
-                  <a href="#" class="hover:underline">Apple iMac 27”</a>
-                </div>
-              </td>
+            <% cart_items.each do |cart_item| %>
+              <tr>
+                <td class="whitespace-nowrap py-4 md:w-[250px]">
+                  <div class="flex items-center gap-4">
+                    <a href="#" class="hover:underline"><%= cart_item.item.name %></a>
+                  </div>
+                </td>
 
-              <td class="p-4 text-base font-normal text-gray-900 dark:text-white">x1</td>
+                <td class="p-4 text-base font-normal text-gray-900 dark:text-white">x<%= cart_item.quantity %></td>
 
-              <td class="p-4 text-right text-base font-bold text-gray-900 dark:text-white">$1,499</td>
-            </tr>
-            <tr>
-              <td class="whitespace-nowrap py-4 md:w-[250px]">
-                <div class="flex items-center gap-4">
-                  <a href="#" class="hover:underline">Apple iMac 27”</a>
-                </div>
-              </td>
-
-              <td class="p-4 text-base font-normal text-gray-900 dark:text-white">x1</td>
-
-              <td class="p-4 text-right text-base font-bold text-gray-900 dark:text-white">$1,499</td>
-            </tr>
-            <tr>
-              <td class="whitespace-nowrap py-4 md:w-[250px]">
-                <div class="flex items-center gap-4">
-                  <a href="#" class="hover:underline">Apple iMac 27”</a>
-                </div>
-              </td>
-
-              <td class="p-4 text-base font-normal text-gray-900 dark:text-white">x1</td>
-
-              <td class="p-4 text-right text-base font-bold text-gray-900 dark:text-white">$1,499</td>
-            </tr>
+                <td class="p-4 text-right text-base font-bold text-gray-900 dark:text-white"><%= cart_item.item.price %>€</td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
