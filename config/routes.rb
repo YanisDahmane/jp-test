@@ -14,4 +14,10 @@ Rails.application.routes.draw do
   root "markets#index"
 
   resources :markets, only: [:show]
+
+  resources :cart_items, only: [:destroy]
+
+  resources :item do
+    resources :cart_items, only: [:create]
+  end
 end

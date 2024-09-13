@@ -9,12 +9,4 @@ class Cart < ApplicationRecord
       cart_items.create(cart: self, item: item, quantity: 1)
     end
   end
-
-  def remove_item(item)
-    cart_item = cart_items.find_by(item: item)
-    if cart_item
-      cart_item.quantity -= 1
-      cart_item.destroy if cart_item.quantity.zero?
-    end
-  end
 end
