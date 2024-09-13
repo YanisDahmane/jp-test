@@ -546,3 +546,279 @@ Processing by Rails::PwaController#manifest as JSON
 Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
 
 
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mMarket Load (0.0ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Load (0.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 1]]
+  [1m[36mItem Destroy (0.3ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 1]]
+  [1m[36mMarket Destroy (0.0ms)[0m  [1m[31mDELETE FROM "markets" WHERE "markets"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarket Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "markets" WHERE "markets"."name" = ? LIMIT ?[0m  [["name", "Chez Yanis"], ["LIMIT", 1]]
+  [1m[36mMarket Create (0.3ms)[0m  [1m[32mINSERT INTO "markets" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Chez Yanis"], ["created_at", "2024-09-13 11:16:03.840978"], ["updated_at", "2024-09-13 11:16:03.840978"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarket Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "markets" WHERE "markets"."name" = ? LIMIT ?[0m  [["name", "Chez Momo"], ["LIMIT", 1]]
+  [1m[36mMarket Create (0.0ms)[0m  [1m[32mINSERT INTO "markets" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Chez Momo"], ["created_at", "2024-09-13 11:16:03.843135"], ["updated_at", "2024-09-13 11:16:03.843135"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mMarket Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "markets"[0m
+  [1m[36mMarket Load (0.0ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Mangosteens"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "t"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Mangosteens"], ["code", "t"], ["price", 4.086101110307345], ["created_at", "2024-09-13 11:16:04.471299"], ["updated_at", "2024-09-13 11:16:04.471299"], ["market_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Custard Apples"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "c"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Custard Apples"], ["code", "c"], ["price", 2.9918718986061856], ["created_at", "2024-09-13 11:16:04.473437"], ["updated_at", "2024-09-13 11:16:04.473437"], ["market_id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Kiwi Fruit"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "t"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Load (0.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 2]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 2]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 3]]
+  [1m[36mMarket Destroy (0.0ms)[0m  [1m[31mDELETE FROM "markets" WHERE "markets"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 3]]
+  [1m[36mMarket Destroy (0.0ms)[0m  [1m[31mDELETE FROM "markets" WHERE "markets"."id" = ?[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarket Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "markets" WHERE "markets"."name" = ? LIMIT ?[0m  [["name", "Chez Yanis"], ["LIMIT", 1]]
+  [1m[36mMarket Create (0.1ms)[0m  [1m[32mINSERT INTO "markets" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Chez Yanis"], ["created_at", "2024-09-13 11:16:52.339859"], ["updated_at", "2024-09-13 11:16:52.339859"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarket Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "markets" WHERE "markets"."name" = ? LIMIT ?[0m  [["name", "Chez Momo"], ["LIMIT", 1]]
+  [1m[36mMarket Create (0.0ms)[0m  [1m[32mINSERT INTO "markets" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Chez Momo"], ["created_at", "2024-09-13 11:16:52.341795"], ["updated_at", "2024-09-13 11:16:52.341795"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mMarket Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "markets"[0m
+  [1m[36mMarket Load (0.0ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Sprouts"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_0"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Sprouts"], ["code", "Chez Yanis_0"], ["price", 3.1389985810267005], ["created_at", "2024-09-13 11:16:52.442082"], ["updated_at", "2024-09-13 11:16:52.442082"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Jarrahdale pumpkin"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_1"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Jarrahdale pumpkin"], ["code", "Chez Yanis_1"], ["price", 6.966936016075309], ["created_at", "2024-09-13 11:16:52.444473"], ["updated_at", "2024-09-13 11:16:52.444473"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Lemon"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_2"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Lemon"], ["code", "Chez Yanis_2"], ["price", 4.112355884561278], ["created_at", "2024-09-13 11:16:52.446488"], ["updated_at", "2024-09-13 11:16:52.446488"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Guava"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_3"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Guava"], ["code", "Chez Yanis_3"], ["price", 1.3308132904926853], ["created_at", "2024-09-13 11:16:52.448484"], ["updated_at", "2024-09-13 11:16:52.448484"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Cherries"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_4"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Cherries"], ["code", "Chez Yanis_4"], ["price", 8.543770662190227], ["created_at", "2024-09-13 11:16:52.450521"], ["updated_at", "2024-09-13 11:16:52.450521"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Limes"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_5"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Limes"], ["code", "Chez Yanis_5"], ["price", 6.287330489488725], ["created_at", "2024-09-13 11:16:52.452540"], ["updated_at", "2024-09-13 11:16:52.452540"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Lychees"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_6"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Lychees"], ["code", "Chez Yanis_6"], ["price", 8.929207510600511], ["created_at", "2024-09-13 11:16:52.454564"], ["updated_at", "2024-09-13 11:16:52.454564"], ["market_id", 4]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Guava"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_7"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Load (0.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 4]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 4]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 5]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 6]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 7]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 8]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 9]]
+  [1m[36mItem Destroy (0.0ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = ?[0m  [["id", 10]]
+  [1m[36mMarket Destroy (0.0ms)[0m  [1m[31mDELETE FROM "markets" WHERE "markets"."id" = ?[0m  [["id", 4]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 5]]
+  [1m[36mMarket Destroy (0.0ms)[0m  [1m[31mDELETE FROM "markets" WHERE "markets"."id" = ?[0m  [["id", 5]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarket Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "markets" WHERE "markets"."name" = ? LIMIT ?[0m  [["name", "Chez Yanis"], ["LIMIT", 1]]
+  [1m[36mMarket Create (0.0ms)[0m  [1m[32mINSERT INTO "markets" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Chez Yanis"], ["created_at", "2024-09-13 11:17:22.513745"], ["updated_at", "2024-09-13 11:17:22.513745"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarket Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "markets" WHERE "markets"."name" = ? LIMIT ?[0m  [["name", "Chez Momo"], ["LIMIT", 1]]
+  [1m[36mMarket Create (0.0ms)[0m  [1m[32mINSERT INTO "markets" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Chez Momo"], ["created_at", "2024-09-13 11:17:22.515644"], ["updated_at", "2024-09-13 11:17:22.515644"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mMarket Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "markets"[0m
+  [1m[36mMarket Load (0.0ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Melon_6_0"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_0"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Melon_6_0"], ["code", "Chez Yanis_0"], ["price", 8.348998956500115], ["created_at", "2024-09-13 11:17:22.618823"], ["updated_at", "2024-09-13 11:17:22.618823"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Sultanas_6_1"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_1"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Sultanas_6_1"], ["code", "Chez Yanis_1"], ["price", 8.22717365445152], ["created_at", "2024-09-13 11:17:22.621327"], ["updated_at", "2024-09-13 11:17:22.621327"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Cantaloupe_6_2"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_2"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Cantaloupe_6_2"], ["code", "Chez Yanis_2"], ["price", 7.882093894390239], ["created_at", "2024-09-13 11:17:22.623394"], ["updated_at", "2024-09-13 11:17:22.623394"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Avocado_6_3"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_3"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Avocado_6_3"], ["code", "Chez Yanis_3"], ["price", 6.854371504116785], ["created_at", "2024-09-13 11:17:22.625432"], ["updated_at", "2024-09-13 11:17:22.625432"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Strawberries_6_4"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_4"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Strawberries_6_4"], ["code", "Chez Yanis_4"], ["price", 1.619921662800417], ["created_at", "2024-09-13 11:17:22.627520"], ["updated_at", "2024-09-13 11:17:22.627520"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Sprouts_6_5"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_5"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Sprouts_6_5"], ["code", "Chez Yanis_5"], ["price", 3.057412154141747], ["created_at", "2024-09-13 11:17:22.629522"], ["updated_at", "2024-09-13 11:17:22.629522"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Grapefruit_6_6"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_6"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Grapefruit_6_6"], ["code", "Chez Yanis_6"], ["price", 6.469170018347455], ["created_at", "2024-09-13 11:17:22.631530"], ["updated_at", "2024-09-13 11:17:22.631530"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Grapes_6_7"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_7"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Grapes_6_7"], ["code", "Chez Yanis_7"], ["price", 3.103359109481172], ["created_at", "2024-09-13 11:17:22.633588"], ["updated_at", "2024-09-13 11:17:22.633588"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Currants_6_8"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_8"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Currants_6_8"], ["code", "Chez Yanis_8"], ["price", 8.48161093973328], ["created_at", "2024-09-13 11:17:22.635673"], ["updated_at", "2024-09-13 11:17:22.635673"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Mulberries_6_9"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Yanis_9"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Mulberries_6_9"], ["code", "Chez Yanis_9"], ["price", 3.86213312150021], ["created_at", "2024-09-13 11:17:22.637707"], ["updated_at", "2024-09-13 11:17:22.637707"], ["market_id", 6]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Papaw_7_0"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_0"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Papaw_7_0"], ["code", "Chez Momo_0"], ["price", 4.236338871338694], ["created_at", "2024-09-13 11:17:22.640089"], ["updated_at", "2024-09-13 11:17:22.640089"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Melon_7_1"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_1"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Melon_7_1"], ["code", "Chez Momo_1"], ["price", 8.524733999312287], ["created_at", "2024-09-13 11:17:22.642178"], ["updated_at", "2024-09-13 11:17:22.642178"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Prunes_7_2"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_2"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Prunes_7_2"], ["code", "Chez Momo_2"], ["price", 6.271947915188067], ["created_at", "2024-09-13 11:17:22.644384"], ["updated_at", "2024-09-13 11:17:22.644384"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Sultanas_7_3"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_3"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Sultanas_7_3"], ["code", "Chez Momo_3"], ["price", 5.041902132714113], ["created_at", "2024-09-13 11:17:22.646421"], ["updated_at", "2024-09-13 11:17:22.646421"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Blood oranges_7_4"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_4"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Blood oranges_7_4"], ["code", "Chez Momo_4"], ["price", 3.5453086375384144], ["created_at", "2024-09-13 11:17:22.648450"], ["updated_at", "2024-09-13 11:17:22.648450"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Kiwi Fruit_7_5"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_5"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Kiwi Fruit_7_5"], ["code", "Chez Momo_5"], ["price", 7.951065041634566], ["created_at", "2024-09-13 11:17:22.650487"], ["updated_at", "2024-09-13 11:17:22.650487"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Longan_7_6"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_6"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Longan_7_6"], ["code", "Chez Momo_6"], ["price", 4.765393290413682], ["created_at", "2024-09-13 11:17:22.652725"], ["updated_at", "2024-09-13 11:17:22.652725"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Grapefruit_7_7"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_7"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Grapefruit_7_7"], ["code", "Chez Momo_7"], ["price", 5.59376015090871], ["created_at", "2024-09-13 11:17:22.654888"], ["updated_at", "2024-09-13 11:17:22.654888"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Avocado_7_8"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_8"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Avocado_7_8"], ["code", "Chez Momo_8"], ["price", 8.747231023991947], ["created_at", "2024-09-13 11:17:22.656931"], ["updated_at", "2024-09-13 11:17:22.656931"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mItem Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Strawberries_7_9"], ["LIMIT", 1]]
+  [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "Chez Momo_9"], ["LIMIT", 1]]
+  [1m[36mItem Create (0.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "code", "price", "created_at", "updated_at", "market_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Strawberries_7_9"], ["code", "Chez Momo_9"], ["price", 4.736554196170224], ["created_at", "2024-09-13 11:17:22.658965"], ["updated_at", "2024-09-13 11:17:22.658965"], ["market_id", 7]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mItem Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started GET "/markets/1" for ::1 at 2024-09-13 13:17:53 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:12:in `set_market'
+Completed 404 Not Found in 15ms (ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.7ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Market with 'id'=1):
+  
+app/controllers/markets_controller.rb:12:in `set_market'
+Started GET "/" for ::1 at 2024-09-13 13:18:02 +0200
+Processing by MarketsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering markets/index.html.erb within layouts/application
+  [1m[36mMarket Load (0.4ms)[0m  [1m[34mSELECT "markets".* FROM "markets"[0m
+  ↳ app/views/markets/index.html.erb:3
+  Rendered markets/index.html.erb within layouts/application (Duration: 7.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 58.8ms | GC: 7.9ms)
+Completed 200 OK in 64ms (Views: 61.6ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 7.9ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:18:02 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.4ms | GC: 0.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/markets/7" for ::1 at 2024-09-13 13:18:03 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mMarket Load (0.2ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:12:in `set_market'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  Rendered markets/show.html.erb within layouts/application (Duration: 1.0ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | GC: 0.7ms)
+Completed 200 OK in 15ms (Views: 10.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/markets/6" for ::1 at 2024-09-13 13:18:04 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.3ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:12:in `set_market'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  Rendered markets/show.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.4ms | GC: 0.5ms)
+Completed 200 OK in 13ms (Views: 9.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.5ms)
+
+
