@@ -1514,3 +1514,349 @@ Processing by Rails::PwaController#manifest as JSON
 Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/markets/6" for ::1 at 2024-09-13 13:49:55 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 1 pending migration:
+
+db/migrate/20240913114539_create_carts.rb
+
+
+):
+  
+activerecord (7.2.1) lib/active_record/migration.rb:756:in `check_pending_migrations'
+activerecord (7.2.1) lib/active_record/migration.rb:663:in `block (2 levels) in call'
+activesupport (7.2.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activesupport (7.2.1) lib/active_support/file_update_checker.rb:95:in `execute_if_updated'
+activerecord (7.2.1) lib/active_record/migration.rb:670:in `block in call'
+activerecord (7.2.1) lib/active_record/migration.rb:660:in `synchronize'
+activerecord (7.2.1) lib/active_record/migration.rb:660:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.7) lib/rack/method_override.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (7.2.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started POST "/rails/actions" for ::1 at 2024-09-13 13:49:59 +0200
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateCarts (20240913114539)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "carts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240913114539') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/markets/6" for ::1 at 2024-09-13 13:49:59 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/models/cart.rb:3:in `initialize'
+app/controllers/markets_controller.rb:9:in `show'
+Started GET "/markets/6" for ::1 at 2024-09-13 13:50:31 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/models/cart.rb:3:in `initialize'
+app/controllers/markets_controller.rb:9:in `show'
+Started GET "/markets/6" for ::1 at 2024-09-13 13:50:36 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/models/cart.rb:3:in `initialize'
+app/controllers/markets_controller.rb:9:in `show'
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:51:41 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:01 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:02 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:17 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:17 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:19 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:21 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:22 +0200
+Started PUT "/__web_console/repl_sessions/fddabc844f22daf5bebe3ba14e2894ee" for ::1 at 2024-09-13 13:52:22 +0200
+Started GET "/markets/6" for ::1 at 2024-09-13 13:52:34 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 1.0ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/models/cart.rb:3:in `initialize'
+app/controllers/markets_controller.rb:9:in `show'
+Started GET "/markets/6" for ::1 at 2024-09-13 13:53:03 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 5.5ms | GC: 0.0ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 6.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 60.8ms | GC: 9.1ms)
+Completed 200 OK in 69ms (Views: 61.4ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 9.1ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:53:04 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.2ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/markets/6" for ::1 at 2024-09-13 13:53:17 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 3.0ms | GC: 0.2ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 3.7ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 46.2ms | GC: 33.8ms)
+Completed 200 OK in 53ms (Views: 46.8ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 34.1ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:53:18 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/26bae296b0dc2d370d78e801c13daaa4" for ::1 at 2024-09-13 13:53:20 +0200
+Started PUT "/__web_console/repl_sessions/26bae296b0dc2d370d78e801c13daaa4" for ::1 at 2024-09-13 13:53:21 +0200
+Started GET "/markets/6" for ::1 at 2024-09-13 13:53:26 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 1.9ms | GC: 0.0ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | GC: 0.3ms)
+Completed 200 OK in 11ms (Views: 8.5ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:53:27 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:28 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:29 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:32 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:34 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:36 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:39 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:39 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:41 +0200
+Started PUT "/__web_console/repl_sessions/bdb7e156b11bc16ba471a7d4aab189da" for ::1 at 2024-09-13 13:53:42 +0200
+Started GET "/markets/6" for ::1 at 2024-09-13 13:53:44 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 2.3ms | GC: 0.2ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 3.1ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.5ms | GC: 0.4ms)
+Completed 200 OK in 11ms (Views: 8.9ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:53:44 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/8aa0c037488680df8f77d9c52f2208f6" for ::1 at 2024-09-13 13:53:45 +0200
+Started PUT "/__web_console/repl_sessions/8aa0c037488680df8f77d9c52f2208f6" for ::1 at 2024-09-13 13:53:46 +0200
+Started GET "/markets/6" for ::1 at 2024-09-13 13:54:57 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:14:in `current_cart'
+  [1m[36mCart Create (0.5ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?) RETURNING "id"[0m  [["created_at", "2024-09-13 11:54:57.373912"], ["updated_at", "2024-09-13 11:54:57.373912"]]
+  ↳ app/controllers/application_controller.rb:14:in `current_cart'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:14:in `current_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 3.1ms | GC: 0.0ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 3.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 0.0ms)
+Completed 200 OK in 20ms (Views: 12.1ms | ActiveRecord: 1.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:54:57 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/408edad904bb0a11c71c8eb14857dc97" for ::1 at 2024-09-13 13:54:59 +0200
+Started PUT "/__web_console/repl_sessions/408edad904bb0a11c71c8eb14857dc97" for ::1 at 2024-09-13 13:54:59 +0200
+Started GET "/markets/6" for ::1 at 2024-09-13 13:55:05 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `current_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 2.5ms | GC: 0.0ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 3.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 8.7ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:55:05 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/e9005d79c195c86309741841bff30312" for ::1 at 2024-09-13 13:55:06 +0200
+Started PUT "/__web_console/repl_sessions/e9005d79c195c86309741841bff30312" for ::1 at 2024-09-13 13:55:06 +0200
+Started PUT "/__web_console/repl_sessions/e9005d79c195c86309741841bff30312" for ::1 at 2024-09-13 13:55:35 +0200
+Started PUT "/__web_console/repl_sessions/e9005d79c195c86309741841bff30312" for ::1 at 2024-09-13 13:55:36 +0200
+Started GET "/markets/6" for ::1 at 2024-09-13 13:55:44 +0200
+Processing by MarketsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mMarket Load (0.1ms)[0m  [1m[34mSELECT "markets".* FROM "markets" WHERE "markets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/markets_controller.rb:15:in `set_market'
+  [1m[36mCart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `current_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering markets/show.html.erb within layouts/application
+  [1m[36mItem Load (0.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."market_id" = ?[0m  [["market_id", 6]]
+  ↳ app/views/markets/_grid_items.html.erb:2
+  Rendered markets/_grid_items.html.erb (Duration: 2.4ms | GC: 0.0ms)
+  Rendered markets/_order_summary.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered markets/show.html.erb within layouts/application (Duration: 3.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | GC: 0.0ms)
+Completed 200 OK in 20ms (Views: 12.2ms | ActiveRecord: 1.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/manifest.json" for ::1 at 2024-09-13 13:55:44 +0200
+Processing by Rails::PwaController#manifest as JSON
+  Rendering pwa/manifest.json.erb
+  Rendered pwa/manifest.json.erb (Duration: 0.2ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:55:45 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:55:46 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:55:50 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:55:51 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:55:54 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:55:56 +0200
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/markets/show.html.erb:10
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:17 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:18 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:20 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:21 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:22 +0200
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/markets/show.html.erb:10
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:27 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:29 +0200
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/markets/show.html.erb:10
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:30 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:31 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:40 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:41 +0200
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/markets/show.html.erb:10
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:42 +0200
+Started PUT "/__web_console/repl_sessions/be7dbe3f61646d5aebbe2f1b702af308" for ::1 at 2024-09-13 13:56:43 +0200

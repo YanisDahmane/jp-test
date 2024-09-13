@@ -6,6 +6,7 @@ class MarketsController < ApplicationController
 
   def show
     @items = @market.items
+    @cart = current_cart
   end
 
   private
