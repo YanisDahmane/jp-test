@@ -1,4 +1,8 @@
 puts "Cleaning database..."
+CartItem.destroy_all
+Item.destroy_all
+
+Cart.destroy_all
 Market.destroy_all
 
 puts "Creating markets..."

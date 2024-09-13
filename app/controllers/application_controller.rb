@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
       session[:cart_id] = nil if @current_cart.nil?
     end
     if session[:cart_id].nil?
-      @current_cart = Cart.new
-      @current_cart.items = {}
+      @current_cart = Cart.create!
       session[:cart_id] = @current_cart.id
     end
     @current_cart

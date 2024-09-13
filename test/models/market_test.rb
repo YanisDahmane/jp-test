@@ -1,5 +1,4 @@
 require "test_helper"
-
 class MarketTest < ActiveSupport::TestCase
   def setup
     @market = Market.new(name: "YanisShop")

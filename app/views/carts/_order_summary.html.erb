@@ -9,7 +9,7 @@
           <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
             <% cart_items.each do |cart_item| %>
               <tr>
-                <td class="whitespace-nowrap py-4 md:w-[250px]">
+                <td class="whitespace-nowrap py-4 md:w-[20px]">
                   <div class="flex items-center gap-4">
                     <a href="#" class="hover:underline"><%= cart_item.item.name %></a>
                   </div>
@@ -19,7 +19,6 @@
                   x<%= cart_item.quantity %>
                   <%= button_to '-', cart_item_path(cart_item), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class: "focus:outline-none text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" %>
                 </td>
-
 
                 <td class="p-4 text-right text-base font-bold text-gray-900 dark:text-white"><%= cart_item.item.price %>€</td>
               </tr>
@@ -50,18 +49,18 @@
           <div class="space-y-2">
             <dl class="flex items-center justify-between gap-4">
               <dt class="text-gray-500 dark:text-gray-400">Prix brut</dt>
-              <dd class="text-base font-medium text-gray-900 dark:text-white"><%= cart_items.sum {|cart_item| cart_item.item.price * cart_item.quantity} %></dd>
+              <dd class="text-base font-medium text-gray-900 dark:text-white"><%= price_b = cart_items.sum {|cart_item| cart_item.item.price * cart_item.quantity}.round(2) %></dd>
             </dl>
 
             <dl class="flex items-center justify-between gap-4">
               <dt class="text-gray-500 dark:text-gray-400">Promotion</dt>
-              <dd class="text-base font-medium text-green-500"><%= promotion(cart_items).sum{|name, amount| amount}%></dd>
+              <dd class="text-base font-medium text-green-500"><%= @promotion.sum{|name, amount| amount}.round(2)%></dd>
             </dl>
           </div>
 
           <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
             <dt class="text-lg font-bold text-gray-900 dark:text-white">Total</dt>
-            <dd class="text-lg font-bold text-gray-900 dark:text-white"><%=cart_items.sum {|cart_item| cart_item.item.price * cart_item.quantity} + promotion(cart_items).sum{|name, amount| amount}%></dd>
+            <dd class="text-lg font-bold text-gray-900 dark:text-white"><%= (price_b + @promotion.sum{|name, amount| amount}).round(2)%></dd>
           </dl>
         </div>
       </div>
