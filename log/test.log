@@ -171,3 +171,1699 @@ ItemTest: test_should_be_valid
   [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."name" = ? LIMIT ?[0m  [["name", "Pomme"], ["LIMIT", 1]]
   [1m[36mItem Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "items" WHERE "items"."code" = ? LIMIT ?[0m  [["code", "P"], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "cart_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "carts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "carts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_items_on_market_id" ON "items" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "markets"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "markets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_item_id" ON "acart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_cart_id" ON "acart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "cart_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_6cdb1f0139"
+FOREIGN KEY ("cart_id")
+  REFERENCES "carts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "cart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_item_id" ON "acart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_cart_id" ON "acart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_6cdb1f0139"
+FOREIGN KEY ("cart_id")
+  REFERENCES "carts" ("id")
+, CONSTRAINT "fk_rails_01e04d947d"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "cart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aitems" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_market_id" ON "aitems" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aitems" ("id","name","code","price","created_at","updated_at","market_id")
+                     SELECT "id","name","code","price","created_at","updated_at","market_id" FROM "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL, CONSTRAINT "fk_rails_1511e8933d"
+FOREIGN KEY ("market_id")
+  REFERENCES "markets" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_items_on_market_id" ON "items" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "items" ("id","name","code","price","created_at","updated_at","market_id")
+                     SELECT "id","name","code","price","created_at","updated_at","market_id" FROM "aitems"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aitems"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240913123337)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20240913114539),
+(20240913105528),
+(20240913105024),
+(20240913104530);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-09-16 06:32:30.891761', '2024-09-16 06:32:30.891762') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '5496cab6605f7ccf33538ec1af882e6a1c705f34', '2024-09-16 06:32:30.892116', '2024-09-16 06:32:30.892117') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.953530', '2024-09-16 06:32:30.953530');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.953530', '2024-09-16 06:32:30.953530');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.955367', '2024-09-16 06:32:30.955367');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.955367', '2024-09-16 06:32:30.955367');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.955576', '2024-09-16 06:32:30.955576');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.955576', '2024-09-16 06:32:30.955576');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.955881', '2024-09-16 06:32:30.955881');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.955881', '2024-09-16 06:32:30.955881')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.958895', '2024-09-16 06:32:30.958895');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.958895', '2024-09-16 06:32:30.958895');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.958944', '2024-09-16 06:32:30.958944');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.958944', '2024-09-16 06:32:30.958944');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.958956', '2024-09-16 06:32:30.958956');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.958956', '2024-09-16 06:32:30.958956');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.958968', '2024-09-16 06:32:30.958968');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.958968', '2024-09-16 06:32:30.958968')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.960992', '2024-09-16 06:32:30.960992');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.960992', '2024-09-16 06:32:30.960992');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.961024', '2024-09-16 06:32:30.961024');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.961024', '2024-09-16 06:32:30.961024');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.961035', '2024-09-16 06:32:30.961035');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.961035', '2024-09-16 06:32:30.961035');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.961048', '2024-09-16 06:32:30.961048');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.961048', '2024-09-16 06:32:30.961048')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.962964', '2024-09-16 06:32:30.962964');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.962964', '2024-09-16 06:32:30.962964');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.962994', '2024-09-16 06:32:30.962994');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.962994', '2024-09-16 06:32:30.962994');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.963004', '2024-09-16 06:32:30.963004');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.963004', '2024-09-16 06:32:30.963004');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.963016', '2024-09-16 06:32:30.963016');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.963016', '2024-09-16 06:32:30.963016')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.964631', '2024-09-16 06:32:30.964631');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.964631', '2024-09-16 06:32:30.964631');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.964655', '2024-09-16 06:32:30.964655');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.964655', '2024-09-16 06:32:30.964655');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.964667', '2024-09-16 06:32:30.964667');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.964667', '2024-09-16 06:32:30.964667');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.964678', '2024-09-16 06:32:30.964678');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.964678', '2024-09-16 06:32:30.964678')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.966268', '2024-09-16 06:32:30.966268');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.966268', '2024-09-16 06:32:30.966268');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.966294', '2024-09-16 06:32:30.966294');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.966294', '2024-09-16 06:32:30.966294');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.966305', '2024-09-16 06:32:30.966305');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.966305', '2024-09-16 06:32:30.966305');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.966316', '2024-09-16 06:32:30.966316');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.966316', '2024-09-16 06:32:30.966316')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.967918', '2024-09-16 06:32:30.967918');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.967918', '2024-09-16 06:32:30.967918');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.967941', '2024-09-16 06:32:30.967941');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.967941', '2024-09-16 06:32:30.967941');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.967950', '2024-09-16 06:32:30.967950');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.967950', '2024-09-16 06:32:30.967950');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.967961', '2024-09-16 06:32:30.967961');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.967961', '2024-09-16 06:32:30.967961')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.969569', '2024-09-16 06:32:30.969569');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.969569', '2024-09-16 06:32:30.969569');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.969597', '2024-09-16 06:32:30.969597');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.969597', '2024-09-16 06:32:30.969597');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.969608', '2024-09-16 06:32:30.969608');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.969608', '2024-09-16 06:32:30.969608');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.969620', '2024-09-16 06:32:30.969620');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.969620', '2024-09-16 06:32:30.969620')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.971472', '2024-09-16 06:32:30.971472');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.971472', '2024-09-16 06:32:30.971472');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.971501', '2024-09-16 06:32:30.971501');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.971501', '2024-09-16 06:32:30.971501');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.971512', '2024-09-16 06:32:30.971512');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.971512', '2024-09-16 06:32:30.971512');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.971526', '2024-09-16 06:32:30.971526');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.971526', '2024-09-16 06:32:30.971526')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:32:30.973213', '2024-09-16 06:32:30.973213');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:32:30.973213', '2024-09-16 06:32:30.973213');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:32:30.973240', '2024-09-16 06:32:30.973240');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:32:30.973240', '2024-09-16 06:32:30.973240');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.973250', '2024-09-16 06:32:30.973250');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:32:30.973250', '2024-09-16 06:32:30.973250');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:32:30.973261', '2024-09-16 06:32:30.973261');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:32:30.973261', '2024-09-16 06:32:30.973261')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "cart_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "carts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "carts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_items_on_market_id" ON "items" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "markets"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "markets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_item_id" ON "acart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_cart_id" ON "acart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_6cdb1f0139"
+FOREIGN KEY ("cart_id")
+  REFERENCES "carts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "cart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_item_id" ON "acart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_cart_id" ON "acart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_6cdb1f0139"
+FOREIGN KEY ("cart_id")
+  REFERENCES "carts" ("id")
+, CONSTRAINT "fk_rails_01e04d947d"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "cart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aitems" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_market_id" ON "aitems" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aitems" ("id","name","code","price","created_at","updated_at","market_id")
+                     SELECT "id","name","code","price","created_at","updated_at","market_id" FROM "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL, CONSTRAINT "fk_rails_1511e8933d"
+FOREIGN KEY ("market_id")
+  REFERENCES "markets" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_items_on_market_id" ON "items" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "items" ("id","name","code","price","created_at","updated_at","market_id")
+                     SELECT "id","name","code","price","created_at","updated_at","market_id" FROM "aitems"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aitems"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240913123337)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20240913114539),
+(20240913105528),
+(20240913105024),
+(20240913104530);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-09-16 06:33:05.253395', '2024-09-16 06:33:05.253396') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '5496cab6605f7ccf33538ec1af882e6a1c705f34', '2024-09-16 06:33:05.253735', '2024-09-16 06:33:05.253736') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.294058', '2024-09-16 06:33:05.294058');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.294058', '2024-09-16 06:33:05.294058');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.295687', '2024-09-16 06:33:05.295687');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.295687', '2024-09-16 06:33:05.295687');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.295863', '2024-09-16 06:33:05.295863');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.295863', '2024-09-16 06:33:05.295863');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.296126', '2024-09-16 06:33:05.296126');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.296126', '2024-09-16 06:33:05.296126')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.299279', '2024-09-16 06:33:05.299279');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.299279', '2024-09-16 06:33:05.299279');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.299321', '2024-09-16 06:33:05.299321');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.299321', '2024-09-16 06:33:05.299321');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.299332', '2024-09-16 06:33:05.299332');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.299332', '2024-09-16 06:33:05.299332');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.299345', '2024-09-16 06:33:05.299345');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.299345', '2024-09-16 06:33:05.299345')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.301389', '2024-09-16 06:33:05.301389');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.301389', '2024-09-16 06:33:05.301389');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.301422', '2024-09-16 06:33:05.301422');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.301422', '2024-09-16 06:33:05.301422');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.301433', '2024-09-16 06:33:05.301433');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.301433', '2024-09-16 06:33:05.301433');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.301446', '2024-09-16 06:33:05.301446');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.301446', '2024-09-16 06:33:05.301446')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.303599', '2024-09-16 06:33:05.303599');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.303599', '2024-09-16 06:33:05.303599');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.303629', '2024-09-16 06:33:05.303629');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.303629', '2024-09-16 06:33:05.303629');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.303640', '2024-09-16 06:33:05.303640');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.303640', '2024-09-16 06:33:05.303640');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.303652', '2024-09-16 06:33:05.303652');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.303652', '2024-09-16 06:33:05.303652')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.305527', '2024-09-16 06:33:05.305527');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.305527', '2024-09-16 06:33:05.305527');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.305555', '2024-09-16 06:33:05.305555');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.305555', '2024-09-16 06:33:05.305555');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.305566', '2024-09-16 06:33:05.305566');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.305566', '2024-09-16 06:33:05.305566');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.305578', '2024-09-16 06:33:05.305578');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.305578', '2024-09-16 06:33:05.305578')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.307311', '2024-09-16 06:33:05.307311');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.307311', '2024-09-16 06:33:05.307311');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.307366', '2024-09-16 06:33:05.307366');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.307366', '2024-09-16 06:33:05.307366');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.307380', '2024-09-16 06:33:05.307380');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.307380', '2024-09-16 06:33:05.307380');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.307394', '2024-09-16 06:33:05.307394');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.307394', '2024-09-16 06:33:05.307394')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.310064', '2024-09-16 06:33:05.310064');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.310064', '2024-09-16 06:33:05.310064');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.310109', '2024-09-16 06:33:05.310109');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.310109', '2024-09-16 06:33:05.310109');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.310122', '2024-09-16 06:33:05.310122');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.310122', '2024-09-16 06:33:05.310122');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.310136', '2024-09-16 06:33:05.310136');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.310136', '2024-09-16 06:33:05.310136')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.312254', '2024-09-16 06:33:05.312254');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.312254', '2024-09-16 06:33:05.312254');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.312286', '2024-09-16 06:33:05.312286');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.312286', '2024-09-16 06:33:05.312286');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.312298', '2024-09-16 06:33:05.312298');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.312298', '2024-09-16 06:33:05.312298');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.312310', '2024-09-16 06:33:05.312310');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.312310', '2024-09-16 06:33:05.312310')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.314256', '2024-09-16 06:33:05.314256');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.314256', '2024-09-16 06:33:05.314256');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.314294', '2024-09-16 06:33:05.314294');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.314294', '2024-09-16 06:33:05.314294');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.314305', '2024-09-16 06:33:05.314305');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.314305', '2024-09-16 06:33:05.314305');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.314320', '2024-09-16 06:33:05.314320');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.314320', '2024-09-16 06:33:05.314320')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:05.316133', '2024-09-16 06:33:05.316133');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:05.316133', '2024-09-16 06:33:05.316133');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:05.316159', '2024-09-16 06:33:05.316159');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:05.316159', '2024-09-16 06:33:05.316159');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.316169', '2024-09-16 06:33:05.316169');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:05.316169', '2024-09-16 06:33:05.316169');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:05.316180', '2024-09-16 06:33:05.316180');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:05.316180', '2024-09-16 06:33:05.316180')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.146617', '2024-09-16 06:33:56.146617');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.146617', '2024-09-16 06:33:56.146617');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.147756', '2024-09-16 06:33:56.147756');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.147756', '2024-09-16 06:33:56.147756');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.147943', '2024-09-16 06:33:56.147943');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.147943', '2024-09-16 06:33:56.147943');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.148258', '2024-09-16 06:33:56.148258');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.148258', '2024-09-16 06:33:56.148258')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.150752', '2024-09-16 06:33:56.150752');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.150752', '2024-09-16 06:33:56.150752');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.150781', '2024-09-16 06:33:56.150781');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.150781', '2024-09-16 06:33:56.150781');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.150792', '2024-09-16 06:33:56.150792');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.150792', '2024-09-16 06:33:56.150792');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.150805', '2024-09-16 06:33:56.150805');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.150805', '2024-09-16 06:33:56.150805')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.153078', '2024-09-16 06:33:56.153078');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.153078', '2024-09-16 06:33:56.153078');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.153195', '2024-09-16 06:33:56.153195');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.153195', '2024-09-16 06:33:56.153195');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.153216', '2024-09-16 06:33:56.153216');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.153216', '2024-09-16 06:33:56.153216');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.153236', '2024-09-16 06:33:56.153236');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.153236', '2024-09-16 06:33:56.153236')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.155481', '2024-09-16 06:33:56.155481');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.155481', '2024-09-16 06:33:56.155481');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.155513', '2024-09-16 06:33:56.155513');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.155513', '2024-09-16 06:33:56.155513');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.155525', '2024-09-16 06:33:56.155525');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.155525', '2024-09-16 06:33:56.155525');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.155538', '2024-09-16 06:33:56.155538');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.155538', '2024-09-16 06:33:56.155538')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.157655', '2024-09-16 06:33:56.157655');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.157655', '2024-09-16 06:33:56.157655');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.157688', '2024-09-16 06:33:56.157688');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.157688', '2024-09-16 06:33:56.157688');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.157699', '2024-09-16 06:33:56.157699');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.157699', '2024-09-16 06:33:56.157699');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.157712', '2024-09-16 06:33:56.157712');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.157712', '2024-09-16 06:33:56.157712')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.159483', '2024-09-16 06:33:56.159483');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.159483', '2024-09-16 06:33:56.159483');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.159513', '2024-09-16 06:33:56.159513');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.159513', '2024-09-16 06:33:56.159513');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.159523', '2024-09-16 06:33:56.159523');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.159523', '2024-09-16 06:33:56.159523');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.159535', '2024-09-16 06:33:56.159535');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.159535', '2024-09-16 06:33:56.159535')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.161133', '2024-09-16 06:33:56.161133');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.161133', '2024-09-16 06:33:56.161133');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.161157', '2024-09-16 06:33:56.161157');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.161157', '2024-09-16 06:33:56.161157');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.161168', '2024-09-16 06:33:56.161168');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.161168', '2024-09-16 06:33:56.161168');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.161180', '2024-09-16 06:33:56.161180');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.161180', '2024-09-16 06:33:56.161180')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.163115', '2024-09-16 06:33:56.163115');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.163115', '2024-09-16 06:33:56.163115');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.163140', '2024-09-16 06:33:56.163140');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.163140', '2024-09-16 06:33:56.163140');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.163150', '2024-09-16 06:33:56.163150');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.163150', '2024-09-16 06:33:56.163150');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.163161', '2024-09-16 06:33:56.163161');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.163161', '2024-09-16 06:33:56.163161')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.164898', '2024-09-16 06:33:56.164898');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.164898', '2024-09-16 06:33:56.164898');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.164925', '2024-09-16 06:33:56.164925');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.164925', '2024-09-16 06:33:56.164925');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.164935', '2024-09-16 06:33:56.164935');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.164935', '2024-09-16 06:33:56.164935');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.164947', '2024-09-16 06:33:56.164947');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.164947', '2024-09-16 06:33:56.164947')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:33:56.166586', '2024-09-16 06:33:56.166586');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:33:56.166586', '2024-09-16 06:33:56.166586');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:33:56.166613', '2024-09-16 06:33:56.166613');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:33:56.166613', '2024-09-16 06:33:56.166613');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.166623', '2024-09-16 06:33:56.166623');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:33:56.166623', '2024-09-16 06:33:56.166623');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:33:56.166634', '2024-09-16 06:33:56.166634');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:33:56.166634', '2024-09-16 06:33:56.166634')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.887675', '2024-09-16 06:35:03.887675');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.887675', '2024-09-16 06:35:03.887675');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.888817', '2024-09-16 06:35:03.888817');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.888817', '2024-09-16 06:35:03.888817');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.889013', '2024-09-16 06:35:03.889013');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.889013', '2024-09-16 06:35:03.889013');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.889295', '2024-09-16 06:35:03.889295');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.889295', '2024-09-16 06:35:03.889295')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.891908', '2024-09-16 06:35:03.891908');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.891908', '2024-09-16 06:35:03.891908');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.891939', '2024-09-16 06:35:03.891939');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.891939', '2024-09-16 06:35:03.891939');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.891952', '2024-09-16 06:35:03.891952');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.891952', '2024-09-16 06:35:03.891952');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.891964', '2024-09-16 06:35:03.891964');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.891964', '2024-09-16 06:35:03.891964')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.893709', '2024-09-16 06:35:03.893709');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.893709', '2024-09-16 06:35:03.893709');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.893739', '2024-09-16 06:35:03.893739');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.893739', '2024-09-16 06:35:03.893739');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.893750', '2024-09-16 06:35:03.893750');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.893750', '2024-09-16 06:35:03.893750');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.893763', '2024-09-16 06:35:03.893763');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.893763', '2024-09-16 06:35:03.893763')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.895769', '2024-09-16 06:35:03.895769');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.895769', '2024-09-16 06:35:03.895769');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.895823', '2024-09-16 06:35:03.895823');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.895823', '2024-09-16 06:35:03.895823');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.895836', '2024-09-16 06:35:03.895836');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.895836', '2024-09-16 06:35:03.895836');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.895850', '2024-09-16 06:35:03.895850');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.895850', '2024-09-16 06:35:03.895850')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.897533', '2024-09-16 06:35:03.897533');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.897533', '2024-09-16 06:35:03.897533');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.897559', '2024-09-16 06:35:03.897559');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.897559', '2024-09-16 06:35:03.897559');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.897569', '2024-09-16 06:35:03.897569');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.897569', '2024-09-16 06:35:03.897569');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.897581', '2024-09-16 06:35:03.897581');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.897581', '2024-09-16 06:35:03.897581')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.899255', '2024-09-16 06:35:03.899255');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.899255', '2024-09-16 06:35:03.899255');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.899286', '2024-09-16 06:35:03.899286');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.899286', '2024-09-16 06:35:03.899286');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.899297', '2024-09-16 06:35:03.899297');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.899297', '2024-09-16 06:35:03.899297');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.899312', '2024-09-16 06:35:03.899312');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.899312', '2024-09-16 06:35:03.899312')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.900957', '2024-09-16 06:35:03.900957');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.900957', '2024-09-16 06:35:03.900957');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.900985', '2024-09-16 06:35:03.900985');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.900985', '2024-09-16 06:35:03.900985');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.901005', '2024-09-16 06:35:03.901005');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.901005', '2024-09-16 06:35:03.901005');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.901017', '2024-09-16 06:35:03.901017');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.901017', '2024-09-16 06:35:03.901017')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.902808', '2024-09-16 06:35:03.902808');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.902808', '2024-09-16 06:35:03.902808');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.902837', '2024-09-16 06:35:03.902837');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.902837', '2024-09-16 06:35:03.902837');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.902847', '2024-09-16 06:35:03.902847');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.902847', '2024-09-16 06:35:03.902847');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.902859', '2024-09-16 06:35:03.902859');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.902859', '2024-09-16 06:35:03.902859')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.904493', '2024-09-16 06:35:03.904493');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.904493', '2024-09-16 06:35:03.904493');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.904518', '2024-09-16 06:35:03.904518');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.904518', '2024-09-16 06:35:03.904518');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.904528', '2024-09-16 06:35:03.904528');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.904528', '2024-09-16 06:35:03.904528');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.904552', '2024-09-16 06:35:03.904552');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.904552', '2024-09-16 06:35:03.904552')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:03.906086', '2024-09-16 06:35:03.906086');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:03.906086', '2024-09-16 06:35:03.906086');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:03.906109', '2024-09-16 06:35:03.906109');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:03.906109', '2024-09-16 06:35:03.906109');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.906118', '2024-09-16 06:35:03.906118');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:03.906118', '2024-09-16 06:35:03.906118');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:03.906143', '2024-09-16 06:35:03.906143');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:03.906143', '2024-09-16 06:35:03.906143')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.149788', '2024-09-16 06:35:21.149788');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.149788', '2024-09-16 06:35:21.149788');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.151044', '2024-09-16 06:35:21.151044');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.151044', '2024-09-16 06:35:21.151044');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.151219', '2024-09-16 06:35:21.151219');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.151219', '2024-09-16 06:35:21.151219');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.151487', '2024-09-16 06:35:21.151487');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.151487', '2024-09-16 06:35:21.151487')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.154215', '2024-09-16 06:35:21.154215');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.154215', '2024-09-16 06:35:21.154215');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.154245', '2024-09-16 06:35:21.154245');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.154245', '2024-09-16 06:35:21.154245');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.154256', '2024-09-16 06:35:21.154256');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.154256', '2024-09-16 06:35:21.154256');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.154267', '2024-09-16 06:35:21.154267');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.154267', '2024-09-16 06:35:21.154267')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.156066', '2024-09-16 06:35:21.156066');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.156066', '2024-09-16 06:35:21.156066');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.156093', '2024-09-16 06:35:21.156093');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.156093', '2024-09-16 06:35:21.156093');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.156103', '2024-09-16 06:35:21.156103');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.156103', '2024-09-16 06:35:21.156103');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.156115', '2024-09-16 06:35:21.156115');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.156115', '2024-09-16 06:35:21.156115')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.157797', '2024-09-16 06:35:21.157797');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.157797', '2024-09-16 06:35:21.157797');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.157823', '2024-09-16 06:35:21.157823');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.157823', '2024-09-16 06:35:21.157823');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.157834', '2024-09-16 06:35:21.157834');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.157834', '2024-09-16 06:35:21.157834');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.157845', '2024-09-16 06:35:21.157845');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.157845', '2024-09-16 06:35:21.157845')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.159413', '2024-09-16 06:35:21.159413');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.159413', '2024-09-16 06:35:21.159413');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.159438', '2024-09-16 06:35:21.159438');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.159438', '2024-09-16 06:35:21.159438');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.159448', '2024-09-16 06:35:21.159448');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.159448', '2024-09-16 06:35:21.159448');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.159459', '2024-09-16 06:35:21.159459');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.159459', '2024-09-16 06:35:21.159459')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.161095', '2024-09-16 06:35:21.161095');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.161095', '2024-09-16 06:35:21.161095');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.161126', '2024-09-16 06:35:21.161126');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.161126', '2024-09-16 06:35:21.161126');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.161136', '2024-09-16 06:35:21.161136');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.161136', '2024-09-16 06:35:21.161136');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.161149', '2024-09-16 06:35:21.161149');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.161149', '2024-09-16 06:35:21.161149')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.163448', '2024-09-16 06:35:21.163448');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.163448', '2024-09-16 06:35:21.163448');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.163481', '2024-09-16 06:35:21.163481');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.163481', '2024-09-16 06:35:21.163481');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.163492', '2024-09-16 06:35:21.163492');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.163492', '2024-09-16 06:35:21.163492');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.163504', '2024-09-16 06:35:21.163504');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.163504', '2024-09-16 06:35:21.163504')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.165796', '2024-09-16 06:35:21.165796');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.165796', '2024-09-16 06:35:21.165796');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.165829', '2024-09-16 06:35:21.165829');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.165829', '2024-09-16 06:35:21.165829');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.165840', '2024-09-16 06:35:21.165840');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.165840', '2024-09-16 06:35:21.165840');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.165853', '2024-09-16 06:35:21.165853');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.165853', '2024-09-16 06:35:21.165853')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.167502', '2024-09-16 06:35:21.167502');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.167502', '2024-09-16 06:35:21.167502');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.167527', '2024-09-16 06:35:21.167527');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.167527', '2024-09-16 06:35:21.167527');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.167538', '2024-09-16 06:35:21.167538');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.167538', '2024-09-16 06:35:21.167538');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.167549', '2024-09-16 06:35:21.167549');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.167549', '2024-09-16 06:35:21.167549')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:21.169132', '2024-09-16 06:35:21.169132');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:21.169132', '2024-09-16 06:35:21.169132');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:21.169156', '2024-09-16 06:35:21.169156');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:21.169156', '2024-09-16 06:35:21.169156');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.169166', '2024-09-16 06:35:21.169166');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:21.169166', '2024-09-16 06:35:21.169166');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:21.169180', '2024-09-16 06:35:21.169180');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:21.169180', '2024-09-16 06:35:21.169180')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "cart_items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "carts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "carts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_items_on_market_id" ON "items" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "markets"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "markets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_item_id" ON "acart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_cart_id" ON "acart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "cart_items"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_6cdb1f0139"
+FOREIGN KEY ("cart_id")
+  REFERENCES "carts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "cart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_item_id" ON "acart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_acart_items_on_cart_id" ON "acart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "cart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "cart_id" integer NOT NULL, "item_id" integer NOT NULL, "quantity" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_6cdb1f0139"
+FOREIGN KEY ("cart_id")
+  REFERENCES "carts" ("id")
+, CONSTRAINT "fk_rails_01e04d947d"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_cart_id" ON "cart_items" ("cart_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_cart_items_on_item_id" ON "cart_items" ("item_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "cart_items" ("id","cart_id","item_id","quantity","created_at","updated_at")
+                     SELECT "id","cart_id","item_id","quantity","created_at","updated_at" FROM "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "acart_items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aitems" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_market_id" ON "aitems" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aitems" ("id","name","code","price","created_at","updated_at","market_id")
+                     SELECT "id","name","code","price","created_at","updated_at","market_id" FROM "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "items"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "price" float, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "market_id" integer NOT NULL, CONSTRAINT "fk_rails_1511e8933d"
+FOREIGN KEY ("market_id")
+  REFERENCES "markets" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_items_on_market_id" ON "items" ("market_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "items" ("id","name","code","price","created_at","updated_at","market_id")
+                     SELECT "id","name","code","price","created_at","updated_at","market_id" FROM "aitems"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aitems"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240913123337)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20240913114539),
+(20240913105528),
+(20240913105024),
+(20240913104530);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-09-16 06:35:56.511682', '2024-09-16 06:35:56.511683') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '5496cab6605f7ccf33538ec1af882e6a1c705f34', '2024-09-16 06:35:56.512027', '2024-09-16 06:35:56.512027') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.554767', '2024-09-16 06:35:56.554767');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.554767', '2024-09-16 06:35:56.554767');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.556603', '2024-09-16 06:35:56.556603');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.556603', '2024-09-16 06:35:56.556603');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.556814', '2024-09-16 06:35:56.556814');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.556814', '2024-09-16 06:35:56.556814');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.557103', '2024-09-16 06:35:56.557103');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.557103', '2024-09-16 06:35:56.557103')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.560956', '2024-09-16 06:35:56.560956');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.560956', '2024-09-16 06:35:56.560956');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.561008', '2024-09-16 06:35:56.561008');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.561008', '2024-09-16 06:35:56.561008');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.561022', '2024-09-16 06:35:56.561022');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.561022', '2024-09-16 06:35:56.561022');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.561038', '2024-09-16 06:35:56.561038');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.561038', '2024-09-16 06:35:56.561038')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.563410', '2024-09-16 06:35:56.563410');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.563410', '2024-09-16 06:35:56.563410');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.563444', '2024-09-16 06:35:56.563444');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.563444', '2024-09-16 06:35:56.563444');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.563456', '2024-09-16 06:35:56.563456');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.563456', '2024-09-16 06:35:56.563456');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.563469', '2024-09-16 06:35:56.563469');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.563469', '2024-09-16 06:35:56.563469')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.565702', '2024-09-16 06:35:56.565702');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.565702', '2024-09-16 06:35:56.565702');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.565737', '2024-09-16 06:35:56.565737');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.565737', '2024-09-16 06:35:56.565737');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.565748', '2024-09-16 06:35:56.565748');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.565748', '2024-09-16 06:35:56.565748');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.565761', '2024-09-16 06:35:56.565761');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.565761', '2024-09-16 06:35:56.565761')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.567500', '2024-09-16 06:35:56.567500');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.567500', '2024-09-16 06:35:56.567500');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.567533', '2024-09-16 06:35:56.567533');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.567533', '2024-09-16 06:35:56.567533');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.567546', '2024-09-16 06:35:56.567546');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.567546', '2024-09-16 06:35:56.567546');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.567560', '2024-09-16 06:35:56.567560');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.567560', '2024-09-16 06:35:56.567560')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.569435', '2024-09-16 06:35:56.569435');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.569435', '2024-09-16 06:35:56.569435');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.569470', '2024-09-16 06:35:56.569470');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.569470', '2024-09-16 06:35:56.569470');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.569637', '2024-09-16 06:35:56.569637');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.569637', '2024-09-16 06:35:56.569637');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.569650', '2024-09-16 06:35:56.569650');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.569650', '2024-09-16 06:35:56.569650')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.571618', '2024-09-16 06:35:56.571618');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.571618', '2024-09-16 06:35:56.571618');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.571653', '2024-09-16 06:35:56.571653');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.571653', '2024-09-16 06:35:56.571653');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.571664', '2024-09-16 06:35:56.571664');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.571664', '2024-09-16 06:35:56.571664');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.571677', '2024-09-16 06:35:56.571677');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.571677', '2024-09-16 06:35:56.571677')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.573489', '2024-09-16 06:35:56.573489');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.573489', '2024-09-16 06:35:56.573489');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.573518', '2024-09-16 06:35:56.573518');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.573518', '2024-09-16 06:35:56.573518');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.573530', '2024-09-16 06:35:56.573530');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.573530', '2024-09-16 06:35:56.573530');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.573542', '2024-09-16 06:35:56.573542');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.573542', '2024-09-16 06:35:56.573542')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.575206', '2024-09-16 06:35:56.575206');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.575206', '2024-09-16 06:35:56.575206');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.575231', '2024-09-16 06:35:56.575231');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.575231', '2024-09-16 06:35:56.575231');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.575241', '2024-09-16 06:35:56.575241');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.575241', '2024-09-16 06:35:56.575241');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.575253', '2024-09-16 06:35:56.575253');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.575253', '2024-09-16 06:35:56.575253')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:35:56.576892', '2024-09-16 06:35:56.576892');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:35:56.576892', '2024-09-16 06:35:56.576892');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:35:56.576917', '2024-09-16 06:35:56.576917');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:35:56.576917', '2024-09-16 06:35:56.576917');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.576928', '2024-09-16 06:35:56.576928');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:35:56.576928', '2024-09-16 06:35:56.576928');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:35:56.576940', '2024-09-16 06:35:56.576940');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:35:56.576940', '2024-09-16 06:35:56.576940')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.710781', '2024-09-16 06:37:44.710781');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.710781', '2024-09-16 06:37:44.710781');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.711932', '2024-09-16 06:37:44.711932');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.711932', '2024-09-16 06:37:44.711932');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.712128', '2024-09-16 06:37:44.712128');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.712128', '2024-09-16 06:37:44.712128');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.712408', '2024-09-16 06:37:44.712408');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.712408', '2024-09-16 06:37:44.712408')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.715170', '2024-09-16 06:37:44.715170');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.715170', '2024-09-16 06:37:44.715170');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.715212', '2024-09-16 06:37:44.715212');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.715212', '2024-09-16 06:37:44.715212');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.715223', '2024-09-16 06:37:44.715223');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.715223', '2024-09-16 06:37:44.715223');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.715236', '2024-09-16 06:37:44.715236');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.715236', '2024-09-16 06:37:44.715236')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.717068', '2024-09-16 06:37:44.717068');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.717068', '2024-09-16 06:37:44.717068');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.717143', '2024-09-16 06:37:44.717143');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.717143', '2024-09-16 06:37:44.717143');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.717159', '2024-09-16 06:37:44.717159');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.717159', '2024-09-16 06:37:44.717159');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.717177', '2024-09-16 06:37:44.717177');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.717177', '2024-09-16 06:37:44.717177')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.719661', '2024-09-16 06:37:44.719661');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.719661', '2024-09-16 06:37:44.719661');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.719697', '2024-09-16 06:37:44.719697');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.719697', '2024-09-16 06:37:44.719697');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.719708', '2024-09-16 06:37:44.719708');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.719708', '2024-09-16 06:37:44.719708');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.719721', '2024-09-16 06:37:44.719721');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.719721', '2024-09-16 06:37:44.719721')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.721514', '2024-09-16 06:37:44.721514');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.721514', '2024-09-16 06:37:44.721514');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.721547', '2024-09-16 06:37:44.721547');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.721547', '2024-09-16 06:37:44.721547');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.721559', '2024-09-16 06:37:44.721559');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.721559', '2024-09-16 06:37:44.721559');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.721571', '2024-09-16 06:37:44.721571');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.721571', '2024-09-16 06:37:44.721571')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.723473', '2024-09-16 06:37:44.723473');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.723473', '2024-09-16 06:37:44.723473');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.723507', '2024-09-16 06:37:44.723507');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.723507', '2024-09-16 06:37:44.723507');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.723518', '2024-09-16 06:37:44.723518');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.723518', '2024-09-16 06:37:44.723518');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.723533', '2024-09-16 06:37:44.723533');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.723533', '2024-09-16 06:37:44.723533')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.725144', '2024-09-16 06:37:44.725144');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.725144', '2024-09-16 06:37:44.725144');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.725168', '2024-09-16 06:37:44.725168');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.725168', '2024-09-16 06:37:44.725168');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.725179', '2024-09-16 06:37:44.725179');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.725179', '2024-09-16 06:37:44.725179');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.725191', '2024-09-16 06:37:44.725191');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.725191', '2024-09-16 06:37:44.725191')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.726698', '2024-09-16 06:37:44.726698');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.726698', '2024-09-16 06:37:44.726698');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.726721', '2024-09-16 06:37:44.726721');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.726721', '2024-09-16 06:37:44.726721');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.726731', '2024-09-16 06:37:44.726731');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.726731', '2024-09-16 06:37:44.726731');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.726749', '2024-09-16 06:37:44.726749');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.726749', '2024-09-16 06:37:44.726749')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.728325', '2024-09-16 06:37:44.728325');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.728325', '2024-09-16 06:37:44.728325');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.728352', '2024-09-16 06:37:44.728352');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.728352', '2024-09-16 06:37:44.728352');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.728364', '2024-09-16 06:37:44.728364');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.728364', '2024-09-16 06:37:44.728364');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.728375', '2024-09-16 06:37:44.728375');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.728375', '2024-09-16 06:37:44.728375')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mFixtures Load (0.1ms)[0m  [1m[31mDELETE FROM "cart_items";
+DELETE FROM "carts";
+DELETE FROM "items";
+DELETE FROM "markets";
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (980190962, 980190962, 980190962, 1, '2024-09-16 06:37:44.729964', '2024-09-16 06:37:44.729964');
+INSERT INTO "cart_items" ("id", "cart_id", "item_id", "quantity", "created_at", "updated_at") VALUES (298486374, 298486374, 298486374, 1, '2024-09-16 06:37:44.729964', '2024-09-16 06:37:44.729964');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (980190962, '2024-09-16 06:37:44.729988', '2024-09-16 06:37:44.729988');
+INSERT INTO "carts" ("id", "created_at", "updated_at") VALUES (298486374, '2024-09-16 06:37:44.729988', '2024-09-16 06:37:44.729988');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.729998', '2024-09-16 06:37:44.729998');
+INSERT INTO "items" ("id", "name", "code", "price", "created_at", "updated_at") VALUES (298486374, 'MyString', 'MyString', 1.5, '2024-09-16 06:37:44.729998', '2024-09-16 06:37:44.729998');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2024-09-16 06:37:44.730009', '2024-09-16 06:37:44.730009');
+INSERT INTO "markets" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2024-09-16 06:37:44.730009', '2024-09-16 06:37:44.730009')[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m

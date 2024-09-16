@@ -2,7 +2,8 @@ require "test_helper"
 
 class ItemTest < ActiveSupport::TestCase
   def setup
-    @item = Item.new(name: "Pomme", code: "P", price: 3.3)
+    @market = Market.create!(name: "YanisShop")
+    @item = Item.new(name: "Pomme", code: "P", price: 3.3, market: @market)
   end
 
   test "should be valid" do
